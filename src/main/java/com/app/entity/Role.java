@@ -1,11 +1,12 @@
 package com.app.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -13,15 +14,17 @@ import java.util.List;
 public class Role implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "role_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "role_name")
     private String roleName;
 
     @ManyToMany(mappedBy = "roles")
-    @JsonBackReference
-    private List<Employee> employees;
+    @JsonIgnore
+    private Set<Employee> employees = new HashSet<>();
+
+
+
 
 }

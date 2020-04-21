@@ -20,28 +20,26 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @Autowired
-    public EmployeeController(EmployeeService employeeService){
+    public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 
     @GetMapping("/all")
-    public List<Employee> getAllEmployees(){
+    public List<Employee> getAllEmployees() {
         return employeeService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Employee> getEmployee(@RequestParam Integer id){
-        if(id != null) {
-            return employeeService.findEmployee(id);
-        }
-        return null;
+    public Optional<Employee> getEmployee(@PathVariable Integer id) {
+        return employeeService.findEmployee(id);
+
     }
 
     @PostMapping("/add")
-    public ResponseEntity addEmployee(@RequestBody Employee employee){
+    public ResponseEntity addEmployee(@RequestBody Employee employee) {
         Map<String, Object> response = new HashMap<>();
 
-        if(employee != null) {
+        if (employee != null) {
             employeeService.saveEmplyee(employee);
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
@@ -49,14 +47,14 @@ public class EmployeeController {
     }
 
     @PostMapping("/update/{id}")
-    public ResponseEntity updateEmployee(@RequestBody EmployeeDTO employeeDTO, @PathVariable Integer id){
+    public ResponseEntity updateEmployee(@RequestBody EmployeeDTO employeeDTO, @PathVariable Integer id) {
         Map<String, Object> response = new HashMap<>();
 
         try {
-            if(employeeService.findEmployee(id).isPresent()){
+            if (employeeService.findEmployee(id).isPresent()) {
                 employeeService.updateEmployee(employeeDTO);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             response.put("Status", "Error");
             response.put("Message", "Error");
         }
@@ -65,10 +63,15 @@ public class EmployeeController {
     }
 
     @PostMapping("/remove/{id}")
-    public void deleteEmployee(@PathVariable Integer id){
-        if(id != null) {
+    public void deleteEmployee(@PathVariable Integer id) {
+        if (id != null) {
             employeeService.removeEmployee(id);
         }
+    }
+
+    @GetMapping("/getByDepartment/{id}")
+    public List<Employee> getEmployeesByDepartment(@PathVariable Integer id) {
+        return employeeService.findEmployeeByDepartment(id);
     }
 
 }

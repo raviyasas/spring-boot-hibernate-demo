@@ -1,8 +1,7 @@
 package com.app.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,8 +13,7 @@ import java.util.List;
 public class Department implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "department_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "department_name")
@@ -24,10 +22,9 @@ public class Department implements Serializable {
     @Column(name = "department_head")
     private String departmentHead;
 
-    @OneToMany(mappedBy = "department", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JsonBackReference
-    @EqualsAndHashCode.Exclude
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "employee_id")
+    @JsonManagedReference
     private List<Employee> employees;
-
 
 }

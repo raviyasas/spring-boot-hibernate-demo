@@ -17,8 +17,8 @@ public class EmployeeService {
     private EmployeeRepository employeeRepository;
 
     @Autowired
-    public EmployeeService(EmployeeRepository employeeRepository){
-        this.employeeRepository=employeeRepository;
+    public EmployeeService(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
     }
 
 
@@ -31,6 +31,7 @@ public class EmployeeService {
     }
 
     public Employee saveEmplyee(Employee employee) {
+
         return employeeRepository.save(employee);
     }
 
@@ -38,16 +39,16 @@ public class EmployeeService {
 
         Employee employee = new Employee();
 
-        if(employeeDTO.getFirstName() != null){
+        if (employeeDTO.getFirstName() != null) {
             employee.setFirstName(employeeDTO.getFirstName());
         }
-        if(employeeDTO.getLastName() != null){
+        if (employeeDTO.getLastName() != null) {
             employee.setLastName(employeeDTO.getLastName());
         }
-        if(employeeDTO.getEmail() != null){
+        if (employeeDTO.getEmail() != null) {
             employee.setEmail(employeeDTO.getEmail());
         }
-        if(employeeDTO.getMobileNumber() != null){
+        if (employeeDTO.getMobileNumber() != null) {
             employee.setMobileNumber(employeeDTO.getMobileNumber());
         }
 
@@ -56,5 +57,9 @@ public class EmployeeService {
 
     public void removeEmployee(Integer id) {
         employeeRepository.deleteById(id);
+    }
+
+    public List<Employee> findEmployeeByDepartment(Integer id) {
+        return employeeRepository.findEmployeeByDepartment_Id(id);
     }
 }

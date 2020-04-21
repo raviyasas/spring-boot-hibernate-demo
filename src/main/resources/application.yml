@@ -1,33 +1,34 @@
 server:
   port: 8090
-
 spring:
   application:
     name: employee-service
-  datasource:
-    url: jdbc:mysql://localhost:3306/hibernateDemo?createDatabaseIfNotExist=true&useSSL=true
-    username: root
-    password: 1234
-    driver-class-name: com.mysql.jdbc.Driver
-  jpa:
-    show-sql: true
-    generate-ddl: true
-    hibernate:
-      ddl-auto: update
-
 #  datasource:
-#    url: jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE
-#    username: sa
-#    password:
-#    driver-class-name: org.h2.Driver
+#    url: jdbc:mysql://localhost:3306/hibernateDemo?createDatabaseIfNotExist=true&useSSL=true
+#    username: root
+#    password: 1234
+#    driver-class-name: com.mysql.cj.jdbc.Driver
 #  jpa:
 #    show-sql: true
 #    generate-ddl: true
-#    database-platform: org.hibernate.dialect.H2Dialect
 #    hibernate:
 #      ddl-auto: create-drop
-#  h2:
-#    console:
-#      enabled: true
-#      path: /h2
+#      use-new-id-generator-mappings: false
+
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+      use-new-id-generator-mappings: false
+  h2:
+    console:
+      enabled: true
+      path: /h2
 
