@@ -3,6 +3,7 @@ package com.app.service;
 import com.app.dto.EmployeeDTO;
 import com.app.entity.Employee;
 import com.app.repository.EmployeeRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,15 +13,10 @@ import java.util.Optional;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class EmployeeService {
 
     private EmployeeRepository employeeRepository;
-
-    @Autowired
-    public EmployeeService(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
-
 
     public List<Employee> findAll() {
         return employeeRepository.findAll();

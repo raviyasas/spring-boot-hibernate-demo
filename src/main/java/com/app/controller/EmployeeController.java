@@ -3,6 +3,8 @@ package com.app.controller;
 import com.app.dto.EmployeeDTO;
 import com.app.entity.Employee;
 import com.app.service.EmployeeService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +17,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/employee")
+@RequiredArgsConstructor
 public class EmployeeController {
 
     private EmployeeService employeeService;
-
-    @Autowired
-    public EmployeeController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
-    }
 
     @GetMapping("/all")
     public List<Employee> getAllEmployees() {
